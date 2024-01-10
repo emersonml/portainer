@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  portainer:
+  app:
     image: portainer/portainer-ce
     restart: always
     ports:
@@ -12,10 +12,12 @@ services:
       # /var/lib/docker/volumes/portainer_portainer_data/_data
       # - portainer_data:/data
     networks:
-      net_portainer:
-        ipv4_address: 10.0.1.2
+      network:
+        ipv4_address: 10.0.11.2
+      nginx_network:
+        ipv4_address: 10.0.2.11
 
-  portainer_agent:
+  agent:
     image: portainer/agent:2.18.4
     restart: always
     ports:
@@ -26,8 +28,9 @@ services:
       # - /var/lib/docker/volumes:/var/lib/docker/volumes
 
     networks:
-      net_portainer:
-        ipv4_address: 10.0.1.3
+      network:
+        ipv4_address: 10.0.11.3
+
 
 
 
@@ -35,8 +38,11 @@ volumes:
   portainer_data:
 
 networks:
-  net_portainer:
+  network:
     driver: bridge
     ipam:
       config:
-        - subnet: 10.0.1.0/24
+        - subnet: 10.0.11.0/24
+  nginx_network:
+    external: true
+      
