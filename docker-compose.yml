@@ -5,7 +5,7 @@ services:
     image: portainer/portainer-ce
     restart: always
     ports:
-      - "8012:9000"
+      - "8012:9012"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./volumes/portainer_data:/data
@@ -29,7 +29,8 @@ services:
 
     networks:
       network:
-        ipv4_address: 10.0.11.3
+      nginx_network:
+        ipv4_address: 10.0.2.12
 
 
 
@@ -39,10 +40,6 @@ volumes:
 
 networks:
   network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.0.11.0/24
   nginx_network:
     external: true
       
