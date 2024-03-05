@@ -13,9 +13,9 @@ services:
       # - portainer_data:/data
     networks:
       network:
-        ipv4_address: 10.0.11.2
       nginx_network:
-        ipv4_address: 10.0.2.11
+        ipv4_address: 10.0.2.12
+
 
   agent:
     image: portainer/agent:2.18.4
@@ -27,19 +27,15 @@ services:
       - ./volumes:/var/lib/docker/volumes
       # - /var/lib/docker/volumes:/var/lib/docker/volumes
 
-    networks:
-      network:
-      nginx_network:
-        ipv4_address: 10.0.2.12
-
-
-
-
-volumes:
-  portainer_data:
 
 networks:
   network:
   nginx_network:
     external: true
       
+
+
+volumes:
+  portainer_data:
+
+
