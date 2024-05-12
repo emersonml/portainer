@@ -9,7 +9,7 @@ services:
       - "8012:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./volumes/portainer_data:/data
+      - /data/portainer:/data
       # /var/lib/docker/volumes/portainer_portainer_data/_data
       # - portainer_data:/data
     networks:
@@ -26,7 +26,7 @@ services:
       - "8112:9001"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./volumes:/var/lib/docker/volumes
+      - /data/portainer:/var/lib/docker/volumes
       # - /var/lib/docker/volumes:/var/lib/docker/volumes
     networks:
       network:
@@ -36,6 +36,7 @@ services:
 
 networks:
   network:
+    driver: bridge
     ipam:
       config:
         - subnet: 10.0.12.0/24
