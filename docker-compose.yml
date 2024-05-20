@@ -8,7 +8,7 @@ services:
       - "9000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /volumes/portainer_data:/data
+      - /data/portainer/app/:/data
 
   agent:
     image: portainer/agent:2.18.4
@@ -17,5 +17,5 @@ services:
       - "9001:9001"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /volumes/portainer_data:/var/lib/docker/volumes
+      - /data/portainer/agent/:/var/lib/docker/volumes
 
