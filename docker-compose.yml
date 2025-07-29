@@ -5,7 +5,7 @@ services:
     hostname: portainer
     restart: always
     ports:
-      - "9000:9000"
+      - "8889:9000"
     volumes:  #volumes/container/serviço/tipodearquivos_ou_caminho/_data
       - /var/run/docker.sock:/var/run/docker.sock
       - /srv/volumes/portainer/app/data/_data:/data
