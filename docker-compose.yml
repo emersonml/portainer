@@ -1,11 +1,28 @@
-
 services:
-  app:
-    image: portainer/portainer-ce
-    hostname: portainer
-    restart: always
+  portainer-app:
+    image: portainer/portainer-ce:latest
+    container_name: portainer-app
+    hostname: portainer-app
+    restart: unless-stopped
+    
     ports:
       - "8999:9000"
-    volumes:  #volumes/container/serviço/tipodearquivos_ou_caminho/_data
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /srv/volumes/portainer/app/data/_data:/data
+      - "9443:9443"
+    
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - app_data:/data
+    
+    networks:
+      - portainer-network
+    
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  app_data:
+
+networks:
+  portainer-network:
+    name: portainer-network
+    driver: bridge
