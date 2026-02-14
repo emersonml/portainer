@@ -13,16 +13,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - app_data:/data
     
-    networks:
-      - portainer-network
-    
     security_opt:
       - no-new-privileges:true
 
 volumes:
   app_data:
-
-networks:
-  portainer-network:
-    name: portainer-network
-    driver: bridge
