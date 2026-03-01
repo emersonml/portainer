@@ -18,7 +18,7 @@ services:
     container_name: portainer-app
     hostname: portainer-app
     restart: unless-stopped
-    user: "203:203"
+    user: "1203:1203"
 
     command: >
       --http-enabled
