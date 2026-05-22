@@ -1,41 +1,19 @@
 services:
-
-  portainer-agent:
-    image: portainer/agent:2.33.7
-    container_name: portainer-agent
-    hostname: portainer-agent
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /var/lib/docker/volumes:/var/lib/docker/volumes
-      - /:/host
-    environment:
-      - AGENT_PORT=9001
-    networks:
-      portainer_network:
-  portainer-app:
+  portainer:
     image: portainer/portainer-ce:2.33.7
-    container_name: portainer-app
-    hostname: portainer-app
+    container_name: portainer
     restart: unless-stopped
     user: "1203:1203"
-
-    command: >
-      --http-enabled
-      -H tcp://portainer-agent:9001
-      --tlsskipverify
     ports:
       - "8999:9000"
       - "9443:9443"
     volumes:
-      - app_data:/data
-    depends_on:
-      - portainer-agent
+      - portainer_data:/data
     networks:
-      portainer_network:
+      - portainer_network
 
 volumes:
-  app_data:
+  portainer_data:
 
 networks:
   portainer_network:
